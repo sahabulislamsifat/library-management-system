@@ -8,15 +8,18 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Books", path: "/books" },
-    { name: "Add Book", path: "/create-book" },
+    { name: "Add Book", path: "/add-book" },
     { name: "Borrow Summary", path: "/borrow-summary" },
   ];
 
   return (
-    <header className="sticky top-0 bg-white/50 dark:bg-neutral-950/50 backdrop-blur-2xl z-10">
+    <header className="sticky top-0 bg-white/50 dark:bg-neutral-950/50 backdrop-blur-2xl z-10 border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-purple-700">
+        <Link
+          to="/"
+          className="text-xl font-bold text-purple-700 dark:text-purple-400"
+        >
           📚 Library
         </Link>
 
@@ -29,20 +32,20 @@ const Navbar = () => {
               className={({ isActive }) =>
                 `text-sm font-medium ${
                   isActive
-                    ? "text-purple-600 underline"
-                    : "text-gray-700 hover:text-purple-600"
+                    ? "text-purple-600 dark:text-purple-400 underline"
+                    : "text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                 }`
               }
             >
               {item.name}
             </NavLink>
           ))}
-          <ModeToggle></ModeToggle>
+          <ModeToggle />
         </nav>
 
         {/* Mobile Button */}
         <button
-          className="md:hidden text-gray-700 focus:outline-none"
+          className="md:hidden text-gray-700 dark:text-gray-300 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -51,7 +54,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t px-4 pb-4">
+        <div className="md:hidden bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-gray-800 px-4 pb-4">
           <nav className="flex flex-col space-y-2">
             {navItems.map((item) => (
               <NavLink
@@ -61,8 +64,8 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `text-sm font-medium ${
                     isActive
-                      ? "text-purple-600 underline"
-                      : "text-gray-700 hover:text-purple-600"
+                      ? "text-purple-600 dark:text-purple-400 underline"
+                      : "text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
                   }`
                 }
               >
