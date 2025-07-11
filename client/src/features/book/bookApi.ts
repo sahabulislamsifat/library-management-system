@@ -19,6 +19,7 @@ export const bookApi = createApi({
     // Get single book by ID
     getBook: builder.query<IBook, string>({
       query: (id) => `books/${id}`,
+      transformResponse: (response: { data: IBook }) => response.data,
     }),
 
     // Add new book

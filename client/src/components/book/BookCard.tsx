@@ -48,7 +48,7 @@ const BookCard = ({ book }: { book: IBook }) => {
 
         <div className="flex gap-2 items-center">
           <Link
-            to={`/books/${book._id}`}
+            to={`/book/${book._id}`}
             className="text-purple-700 dark:text-purple-300 hover:text-purple-900 cursor-pointer dark:hover:text-white"
           >
             <Eye size={18} />
