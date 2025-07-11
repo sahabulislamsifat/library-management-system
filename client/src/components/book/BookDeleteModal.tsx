@@ -9,7 +9,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
-import { Button } from "../ui/button";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 interface IDeleteDialogProps {
@@ -20,14 +19,18 @@ const BookDeleteModal = ({ onDelete }: IDeleteDialogProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          className=" hover:text-red-600 text-red-600 border border-red-500"
+        {/* <Button
+          className=" hover:text-red-600 text-red-600 rounded-none border-none cursor-pointer"
           variant="outline"
         >
-          <RiDeleteBin6Line />
-        </Button>
+        </Button> */}
+        <RiDeleteBin6Line
+          className=" hover:text-red-600 text-red-600 rounded-none border-none cursor-pointer"
+          size={18}
+          title="Delete Book"
+        />
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="sm:max-w-lg rounded-none bg-white/50 dark:bg-neutral-950/80 dark:text-white dark:border-gray-800">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-xl">
             Confirm Deletion
@@ -37,9 +40,11 @@ const BookDeleteModal = ({ onDelete }: IDeleteDialogProps) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="rounded-none cursor-pointer">
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction
-            className="bg-red-900 hover:bg-red-900 text-white"
+            className="bg-red-700 cursor-pointer hover:bg-red-800 rounded-none text-white"
             onClick={onDelete}
           >
             {" "}

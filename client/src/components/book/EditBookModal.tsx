@@ -79,7 +79,7 @@ const EditBookModal = ({ book }: EditBookProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Pencil
-          className="text-yellow-600 rounded-none cursor-pointer hover:text-yellow-700 p-0"
+          className="text-yellow-600 rounded-none cursor-pointer hover:text-yellow-700"
           size={18}
         />
       </DialogTrigger>

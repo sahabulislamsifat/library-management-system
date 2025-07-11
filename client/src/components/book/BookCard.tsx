@@ -1,10 +1,25 @@
 import type { IBook } from "@/types";
-import { Eye, Trash2 } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Link } from "react-router";
 import BorrowBook from "../borrow/BorrowBook";
 import EditBookModal from "./EditBookModal";
+import BookDeleteModal from "./BookDeleteModal";
+import { useDeleteBookMutation } from "@/features/book/bookApi";
+import toast from "react-hot-toast";
 
 const BookCard = ({ book }: { book: IBook }) => {
+  const [deleteBook] = useDeleteBookMutation();
+
+  const handleDelete = async () => {
+    try {
+      await deleteBook(book._id!);
+      toast.success("Book Deleted successfully!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Book Deleted failed!");
+    }
+  };
+
   return (
     <div className="w-80 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-gray-800 dark:to-gray-950 p-4 rounded shadow-md hover:shadow-xl transition duration-300 border dark:border-gray-700">
       {/* Image */}
@@ -62,13 +77,7 @@ const BookCard = ({ book }: { book: IBook }) => {
           <EditBookModal book={book}></EditBookModal>
 
           {/* Delete Option */}
-          <Link
-            title="Delete Book"
-            to={`/book/delete/${book._id}`}
-            className="text-red-600 hover:text-red-700 cursor-pointer"
-          >
-            <Trash2 size={18} />
-          </Link>
+          <BookDeleteModal onDelete={handleDelete}></BookDeleteModal>
         </div>
       </div>
     </div>
