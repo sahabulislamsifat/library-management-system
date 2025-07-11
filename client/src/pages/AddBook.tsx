@@ -2,7 +2,7 @@ import AddBookForm from "@/components/book/AddBookForm";
 
 const AddBook = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-white/50 dark:bg-neutral-950/50">
       <AddBookForm></AddBookForm>
     </div>
   );

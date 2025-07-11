@@ -12,6 +12,7 @@ export const bookApi = createApi({
     // Get all books
     getBooks: builder.query<IBook[], void>({
       query: () => "books",
+      transformResponse: (response: { data: IBook[] }) => response.data,
       providesTags: ["Books"],
     }),
 

@@ -13,7 +13,7 @@ export interface IBook {
   description?: string;
   copies: number;
   available?: boolean;
-  image: string;
+  image?: string;
 }
 
 export interface IBorrow {
