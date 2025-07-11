@@ -23,13 +23,6 @@ export interface IBorrow {
   dueDate: string; // ISO format date
 }
 
-// export interface IBorrowSummary {
-//   _id: string;
-//   title: string;
-//   isbn: string;
-//   totalQuantity: number;
-// }
-
 export interface IBorrowSummary {
   _id: string;
   totalQuantity: number;
@@ -38,4 +31,14 @@ export interface IBorrowSummary {
     isbn?: string;
     // add other book properties if needed
   };
+}
+
+export interface EditBookFormData {
+  id: string;
+  title: string;
+  author: string;
+  genre: string;
+  isbn: string;
+  description: string;
+  copies: number;
 }

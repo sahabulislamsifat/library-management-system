@@ -71,7 +71,7 @@ const BorrowBook = ({ book }: BorrowDialogProps) => {
           <div className="space-y-2">
             <Label htmlFor="copies">Quantity </Label>
             <Input
-              className="w-full rounded-none border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
+              className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
               id="quantity"
               type="number"
               value={quantity}

@@ -1,7 +1,8 @@
 import type { IBook } from "@/types";
-import { Eye, Pencil, Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import BorrowBook from "../borrow/BorrowBook";
+import EditBookModal from "./EditBookModal";
 
 const BookCard = ({ book }: { book: IBook }) => {
   return (
@@ -44,23 +45,26 @@ const BookCard = ({ book }: { book: IBook }) => {
 
       {/* Actions */}
       <div className="flex justify-between items-center mt-4">
+        {/* Borrow Book */}
         <BorrowBook book={book}></BorrowBook>
 
         <div className="flex gap-2 items-center">
+          {/* View Details */}
           <Link
+            title="View Details"
             to={`/book/${book._id}`}
             className="text-purple-700 dark:text-purple-300 hover:text-purple-900 cursor-pointer dark:hover:text-white"
           >
             <Eye size={18} />
           </Link>
+
+          {/* Edit Option  */}
+          <EditBookModal book={book}></EditBookModal>
+
+          {/* Delete Option */}
           <Link
-            to="/"
-            className="text-yellow-600 cursor-pointer hover:text-yellow-700"
-          >
-            <Pencil size={18} />
-          </Link>
-          <Link
-            to="/"
+            title="Delete Book"
+            to={`/book/delete/${book._id}`}
             className="text-red-600 hover:text-red-700 cursor-pointer"
           >
             <Trash2 size={18} />
