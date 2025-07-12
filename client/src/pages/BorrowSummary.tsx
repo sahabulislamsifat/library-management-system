@@ -1,17 +1,12 @@
+import LoadingSpinner from "@/components/loading/LoadingSpinner";
 import { useGetBorrowSummaryQuery } from "@/features/borrow/borrowApi";
-import { Loader2 } from "lucide-react";
 
 const BorrowSummary = () => {
   const { data, isLoading, isError } = useGetBorrowSummaryQuery();
   // console.log("Borrow Summary Data:", data);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-40">
-        <Loader2 className="animate-spin h-6 w-6 text-purple-600" />
-        <span className="ml-2 text-purple-600">Loading summary...</span>
-      </div>
-    );
+    return <LoadingSpinner></LoadingSpinner>;
   }
 
   if (isError || !data?.length) {

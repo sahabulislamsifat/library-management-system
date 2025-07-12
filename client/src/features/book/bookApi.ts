@@ -10,10 +10,61 @@ export const bookApi = createApi({
   tagTypes: ["Books"],
   endpoints: (builder) => ({
     // Get all books
-    getBooks: builder.query<IBook[], void>({
-      query: () => "books",
+    getBooks: builder.query<
+      {
+        data: IBook[];
+        total: number;
+        page: number;
+        limit: number;
+      },
+      {
+        page?: number;
+        limit?: number;
+        sortBy?: string;
+        sort?: "asc" | "desc";
+        filter?: string;
+      }
+    >({
+      query: ({
+        page = 1,
+        limit = 8,
+        sortBy = "createdAt",
+        sort = "desc",
+        filter,
+      } = {}) => {
+        let queryString = `/books?page=${page}&limit=${limit}&sortBy=${sortBy}&sort=${sort}`;
+        if (filter) queryString += `&filter=${filter}`;
+        return queryString;
+      },
+
+      providesTags: (result) =>
+        result?.data
+          ? [
+              // Tag each book individually by ID
+              ...result.data.map((book) => ({
+                type: "Books" as const,
+                id: book._id,
+              })),
+              // Tag the full list
+              { type: "Books", id: "LIST" },
+            ]
+          : [{ type: "Books", id: "LIST" }],
+    }),
+
+    // Get highest copies books
+    getHighestCopiesBooks: builder.query<IBook[], void>({
+      query: () => "books/highest-copies",
       transformResponse: (response: { data: IBook[] }) => response.data,
-      providesTags: ["Books"],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map((book) => ({
+                type: "Books" as const,
+                id: book._id,
+              })),
+              { type: "Books", id: "LIST" },
+            ]
+          : [{ type: "Books", id: "LIST" }],
     }),
 
     // Get single book by ID
@@ -29,7 +80,7 @@ export const bookApi = createApi({
         method: "POST",
         body: newBook,
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: [{ type: "Books", id: "LIST" }],
     }),
 
     // Update existing book
@@ -39,7 +90,10 @@ export const bookApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "Books", id },
+        { type: "Books", id: "LIST" },
+      ],
     }),
 
     // Delete book
@@ -48,13 +102,17 @@ export const bookApi = createApi({
         url: `books/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Books"],
+      invalidatesTags: (_result, error, id) => [
+        { type: "Books", id },
+        { type: "Books", id: "LIST" },
+      ],
     }),
   }),
 });
 
 export const {
   useGetBooksQuery,
+  useGetHighestCopiesBooksQuery,
   useGetBookQuery,
   useAddBookMutation,
   useUpdateBookMutation,

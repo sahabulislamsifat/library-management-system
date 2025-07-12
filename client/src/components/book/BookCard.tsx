@@ -9,7 +9,8 @@ import toast from "react-hot-toast";
 
 const BookCard = ({ book }: { book: IBook }) => {
   const [deleteBook] = useDeleteBookMutation();
-  console.log("BookCard", book);
+
+  // console.log("BookCard", book);
 
   const handleDelete = async () => {
     try {
@@ -57,6 +58,16 @@ const BookCard = ({ book }: { book: IBook }) => {
             {book.description}
           </p>
         )}
+
+        <p
+          className={`text-sm line-clamp-3 ${
+            book.available
+              ? "text-green-600 dark:text-green-400"
+              : "text-red-600 dark:text-red-400"
+          }`}
+        >
+          {book.available ? "Available" : "Unavailable"}
+        </p>
       </div>
 
       {/* Actions */}

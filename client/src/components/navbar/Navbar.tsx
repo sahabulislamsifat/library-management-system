@@ -16,12 +16,19 @@ const Navbar = () => {
     <header className="sticky top-0 bg-white/50 dark:bg-neutral-950/50 backdrop-blur-2xl z-10 border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link
-          to="/"
-          className="text-xl font-bold text-purple-700 dark:text-purple-400"
-        >
-          📚 Library
-        </Link>
+        <div className="flex items-center space-x-4">
+          <Link
+            to="/"
+            className="text-xl font-bold text-purple-700 dark:text-purple-400"
+          >
+            <img
+              className="inline-block h-10 w-10 mr-2"
+              src="https://img.icons8.com/?size=100&id=48152&format=png&color=000000"
+              alt=""
+            />
+            Library
+          </Link>
+        </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-6">

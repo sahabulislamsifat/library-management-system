@@ -6,6 +6,7 @@ import {
   updateBookService,
   deleteBookService,
 } from "./book.service";
+import { Book } from "./book.model";
 
 export const createBook = async (req: Request, res: Response) => {
   try {
@@ -30,24 +31,44 @@ export const getAllBooks = async (req: Request, res: Response) => {
       filter,
       sortBy = "createdAt",
       sort = "desc",
-      limit = "10",
+      limit = "8",
+      page = "1",
     } = req.query;
+
     const data = await getAllBooksService({
       filter: filter as string,
       sortBy: sortBy as string,
       sort: sort as "asc" | "desc",
       limit: Number(limit),
+      page: Number(page),
     });
 
     res.status(200).json({
       success: true,
       message: "Books retrieved successfully",
-      data,
+      ...data,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to get books",
+      error,
+    });
+  }
+};
+
+export const getHighestCopiesBooks = async (req: Request, res: Response) => {
+  try {
+    const books = await Book.find().sort({ copies: -1 }).limit(8);
+    res.status(201).json({
+      success: true,
+      message: "Book retrieved successfully",
+      data: books,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Highest Books Copies retrieved failed",
+      success: false,
       error,
     });
   }

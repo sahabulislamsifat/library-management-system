@@ -19,11 +19,6 @@ const BookDeleteModal = ({ onDelete }: IDeleteDialogProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        {/* <Button
-          className=" hover:text-red-600 text-red-600 rounded-none border-none cursor-pointer"
-          variant="outline"
-        >
-        </Button> */}
         <RiDeleteBin6Line
           className=" hover:text-red-600 text-red-600 rounded-none border-none cursor-pointer"
           size={18}

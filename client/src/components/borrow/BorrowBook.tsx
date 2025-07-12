@@ -20,6 +20,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
+import { useGetBooksQuery } from "@/features/book/bookApi";
 
 interface BorrowDialogProps {
   book: IBook;
@@ -30,6 +31,7 @@ const BorrowBook = ({ book }: BorrowDialogProps) => {
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [open, setOpen] = useState(false);
   const [createBorrow] = useBorrowBookMutation();
+  const { refetch } = useGetBooksQuery({ page: 1, limit: 8 });
 
   const navigate = useNavigate();
   const handleSubmit = async () => {
@@ -44,7 +46,7 @@ const BorrowBook = ({ book }: BorrowDialogProps) => {
         dueDate: dueDate.toISOString(),
       };
       await createBorrow(borrowData).unwrap();
-
+      refetch();
       toast.success("Book borrow successfully!");
       navigate("/borrow-summary");
       setOpen(false);

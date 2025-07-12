@@ -10,10 +10,17 @@ interface IQueryOptions {
   sortBy?: string;
   sort?: "asc" | "desc";
   limit?: number;
+  page?: number;
 }
 
 export const getAllBooksService = async (options: IQueryOptions) => {
-  const { filter, sortBy = "createdAt", sort = "desc", limit = 10 } = options;
+  const {
+    filter,
+    sortBy = "createdAt",
+    sort = "desc",
+    limit = 8,
+    page = 1,
+  } = options;
 
   const query: any = {};
   if (filter) {
@@ -23,8 +30,18 @@ export const getAllBooksService = async (options: IQueryOptions) => {
   const sortOption: any = {};
   sortOption[sortBy] = sort === "asc" ? 1 : -1;
 
-  const books = await Book.find(query).sort(sortOption).limit(limit);
-  return books;
+  const skip = (page - 1) * limit;
+
+  const books = await Book.find(query).sort(sortOption).skip(skip).limit(limit);
+
+  const total = await Book.countDocuments(query);
+
+  return {
+    data: books,
+    total,
+    page,
+    limit,
+  };
 };
 
 export const getBookByIdService = async (id: string) => {
