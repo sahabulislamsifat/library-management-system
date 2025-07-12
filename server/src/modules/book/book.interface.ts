@@ -11,6 +11,7 @@ export type GenreType =
 export interface IBook {
   title: string;
   author: string;
+  image: string;
   genre: GenreType;
   isbn: string;
   description?: string;

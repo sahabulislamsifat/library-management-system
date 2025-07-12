@@ -29,7 +29,6 @@ export interface IBorrowSummary {
   book?: {
     title?: string;
     isbn?: string;
-    // add other book properties if needed
   };
 }
 
@@ -37,6 +36,7 @@ export interface EditBookFormData {
   id: string;
   title: string;
   author: string;
+  image: string;
   genre: string;
   isbn: string;
   description: string;

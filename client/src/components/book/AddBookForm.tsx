@@ -14,6 +14,7 @@ type Genre =
 type FormData = {
   title: string;
   author: string;
+  image: string;
   genre: string;
   isbn: string;
   description?: string;
@@ -49,6 +50,7 @@ const AddBookForm = () => {
         genre: genreMap[data.genre],
       };
       await addBook(payload).unwrap();
+      // console.log("Book added successfully:", payload);
       toast.success("📚 Book added successfully!");
       reset();
       navigate("/books");
@@ -65,7 +67,7 @@ const AddBookForm = () => {
         </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white/50 dark:bg-neutral-950/50 border border-slate-100 dark:border-slate-700 p-6 space-y-5"
+          className="bg-white/50 dark:bg-neutral-950/50 border border-slate-100 dark:border-slate-700 p-6 space-y-5 shadow-sm"
         >
           {/* Title */}
           <div>
@@ -73,6 +75,7 @@ const AddBookForm = () => {
               Title <span className="text-red-500">*</span>
             </label>
             <input
+              placeholder="Enter book title..."
               {...register("title", { required: "Title is required" })}
               className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
             />
@@ -89,12 +92,29 @@ const AddBookForm = () => {
               Author <span className="text-red-500">*</span>
             </label>
             <input
+              placeholder="Author's name"
               {...register("author", { required: "Author is required" })}
               className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
             />
             {errors.author && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.author.message}
+              </p>
+            )}
+          </div>
+          {/* Image URL */}
+          <div>
+            <label className="block text-sm font-medium mb-1 dark:text-gray-200">
+              Image <span className="text-red-500">*</span>
+            </label>
+            <input
+              placeholder="drop image URL here"
+              {...register("image", { required: "Image is required" })}
+              className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
+            />
+            {errors.image && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.image.message}
               </p>
             )}
           </div>
@@ -132,6 +152,7 @@ const AddBookForm = () => {
               ISBN <span className="text-red-500">*</span>
             </label>
             <input
+              placeholder="ISBN number"
               {...register("isbn", { required: "ISBN is required" })}
               className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
             />
@@ -146,6 +167,7 @@ const AddBookForm = () => {
               Description
             </label>
             <textarea
+              placeholder="Write a brief description of the book..."
               {...register("description")}
               rows={4}
               className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
@@ -158,6 +180,7 @@ const AddBookForm = () => {
               Copies <span className="text-red-500">*</span>
             </label>
             <input
+              defaultValue={1}
               type="number"
               min={1}
               {...register("copies", {

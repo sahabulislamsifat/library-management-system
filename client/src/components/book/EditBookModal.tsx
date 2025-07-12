@@ -43,6 +43,7 @@ const EditBookModal = ({ book }: EditBookProps) => {
     defaultValues: {
       title: book.title,
       author: book.author,
+      image: book.image,
       genre:
         Object.keys(genreMap).find((key) => genreMap[key] === book.genre) || "",
       isbn: book.isbn,
@@ -83,7 +84,7 @@ const EditBookModal = ({ book }: EditBookProps) => {
           size={18}
         />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg rounded-none">
+      <DialogContent className="sm:max-w-lg rounded-none bg-white/95 dark:bg-neutral-950/95 dark:text-white dark:border-gray-800">
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle>Edit Book</DialogTitle>
@@ -109,6 +110,16 @@ const EditBookModal = ({ book }: EditBookProps) => {
               />
               {errors.author && (
                 <p className="text-sm text-red-500">{errors.author.message}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label>Image</Label>
+              <Input
+                className="w-full rounded-none border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
+                {...register("image", { required: "Image is required" })}
+              />
+              {errors.image && (
+                <p className="text-sm text-red-500">{errors.image.message}</p>
               )}
             </div>
 

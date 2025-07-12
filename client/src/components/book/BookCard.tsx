@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 const BookCard = ({ book }: { book: IBook }) => {
   const [deleteBook] = useDeleteBookMutation();
+  console.log("BookCard", book);
 
   const handleDelete = async () => {
     try {
@@ -21,7 +22,7 @@ const BookCard = ({ book }: { book: IBook }) => {
   };
 
   return (
-    <div className="w-80 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-gray-800 dark:to-gray-950 p-4 rounded shadow-md hover:shadow-xl transition duration-300 border dark:border-gray-700">
+    <div className="w-80  dark:from-gray-800 dark:to-gray-950 p-4 rounded shadow-md hover:shadow-xl transition duration-300 border dark:border-gray-700">
       {/* Image */}
       <div className="h-48 w-full overflow-hidden rounded mb-4">
         <img

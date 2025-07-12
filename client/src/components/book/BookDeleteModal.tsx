@@ -30,7 +30,7 @@ const BookDeleteModal = ({ onDelete }: IDeleteDialogProps) => {
           title="Delete Book"
         />
       </AlertDialogTrigger>
-      <AlertDialogContent className="sm:max-w-lg rounded-none bg-white/50 dark:bg-neutral-950/80 dark:text-white dark:border-gray-800">
+      <AlertDialogContent className="sm:max-w-lg rounded-none bg-white/80 dark:bg-neutral-950/80 dark:text-white dark:border-gray-800">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-xl">
             Confirm Deletion

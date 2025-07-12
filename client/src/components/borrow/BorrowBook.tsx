@@ -57,7 +57,7 @@ const BorrowBook = ({ book }: BorrowDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="text-sm rounded-[2px] bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 cursor-pointer">
+        <Button className="rounded-[2px] cursor-pointer" variant="outline">
           Borrow Book
         </Button>
       </DialogTrigger>
@@ -71,7 +71,7 @@ const BorrowBook = ({ book }: BorrowDialogProps) => {
           <div className="space-y-2">
             <Label htmlFor="copies">Quantity </Label>
             <Input
-              className="w-full border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
+              className="w-full rounded-none border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
               id="quantity"
               type="number"
               value={quantity}

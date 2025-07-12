@@ -28,7 +28,7 @@ const BorrowSummary = () => {
         📄 Borrow Summary
       </h2>
 
-      <div className="overflow-x-auto rounded-none shadow-md border dark:border-gray-700">
+      <div className="overflow-x-auto rounded-none shadow-sm border dark:border-gray-700">
         <table className="min-w-full text-sm text-left text-gray-700 dark:text-gray-300">
           <thead className="text-xs uppercase bg-purple-100 dark:bg-gray-800 dark:text-gray-400">
             <tr>

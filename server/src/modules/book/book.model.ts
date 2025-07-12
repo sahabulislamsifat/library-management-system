@@ -15,6 +15,11 @@ const bookSchema = new Schema<IBook>(
       required: [true, "Author name is required."],
       trim: true,
     },
+    image: {
+      type: String,
+      required: [true, "Image name is required."],
+      trim: true,
+    },
     genre: {
       type: String,
       enum: {
