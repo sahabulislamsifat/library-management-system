@@ -1,69 +1,149 @@
-# React + TypeScript + Vite
+# 📚 Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **minimal Library Management API** built with **Express**, **TypeScript**, and **MongoDB (via Mongoose)** that allows users to manage books and borrow records effectively.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- ✅ Add, update, delete, and retrieve books
+- 📚 Borrow books with quantity check and availability update
+- 📊 View borrowed books summary using aggregation pipeline
+- 🧠 Mongoose static method, instance method, and middleware used
+- 🔍 Filtering and sorting of books
+- 🧪 Schema validation and proper error handling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ⚙️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Backend Framework:** Express.js
+- **Language:** TypeScript
+- **Database:** MongoDB with Mongoose
+- **Validation:** Mongoose Schema Validation
+- **Deployment:** Vercel / Render / Railway _(based on your deployment)_
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📁 Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+📦 library-management-api
+├── src
+│ ├── app
+│ │ ├── modules
+│ │ │ ├── book
+│ │ │ └── borrow
+│ │ ├── middlewares
+│ │ ├── utils
+│ ├── config
+│ ├── server.ts
+├── package.json
+├── tsconfig.json
+└── README.md
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+yaml
+Copy code
+
+---
+
+## 📌 API Endpoints
+
+### ✅ Book Endpoints
+
+| Method | Endpoint         | Description                      |
+| ------ | ---------------- | -------------------------------- |
+| POST   | `/api/books`     | Create a new book                |
+| GET    | `/api/books`     | Get all books (with filter/sort) |
+| GET    | `/api/books/:id` | Get a single book by ID          |
+| PUT    | `/api/books/:id` | Update a book                    |
+| DELETE | `/api/books/:id` | Delete a book                    |
+
+---
+
+### ✅ Borrow Endpoints
+
+| Method | Endpoint      | Description                      |
+| ------ | ------------- | -------------------------------- |
+| POST   | `/api/borrow` | Borrow a book (with checks)      |
+| GET    | `/api/borrow` | Borrow summary using aggregation |
+
+---
+
+## 🧪 Sample Book Fields
+
+```json
+{
+  "title": "The Theory of Everything",
+  "author": "Stephen Hawking",
+  "genre": "SCIENCE",
+  "isbn": "9780553380163",
+  "description": "An overview of cosmology and black holes.",
+  "copies": 5,
+  "available": true
+}
+⚙️ Setup Instructions
+1. Clone the Repository
+bash
+Copy code
+git clone https://github.com/your-username/library-management-api.git
+cd library-management-api
+2. Install Dependencies
+bash
+Copy code
+npm install
+3. Setup Environment Variables
+Create a .env file in the root with:
+
+env
+Copy code
+PORT=5000
+DATABASE_URL=your_mongodb_connection_string
+4. Run the Server
+In development:
+bash
+Copy code
+npm run dev
+In production:
+bash
+Copy code
+npm run build
+npm start
+🧠 Key Concepts Used
+Mongoose Middleware (pre, post)
+
+Instance/Static methods
+
+Aggregation Pipeline ($group, $lookup)
+
+DTO and Custom Error Handling
+
+Filtering, Sorting, Pagination (optional)
+
+🪲 Error Response Format
+json
+Copy code
+{
+  "success": false,
+  "message": "Validation failed",
+  "error": {
+    "name": "ValidationError",
+    "errors": {
+      "copies": {
+        "message": "Copies must be a positive number"
+      }
+    }
+  }
+}
+📽 Video Explanation
+📺 Click to watch
+(Add your own video walkthrough link here)
+
+🌐 Live Deployment
+🔗 Live API Base URL
+(Replace with your actual link from Vercel, Render, or Railway)
+
+👨‍💻 Author
+Name: Sahabul Islam Sifat
+
+Email: sahabulislamsifat@gmail.com
 ```
