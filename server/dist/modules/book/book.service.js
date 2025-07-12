@@ -17,15 +17,22 @@ const createBookService = (payload) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.createBookService = createBookService;
 const getAllBooksService = (options) => __awaiter(void 0, void 0, void 0, function* () {
-    const { filter, sortBy = "createdAt", sort = "desc", limit = 10 } = options;
+    const { filter, sortBy = "createdAt", sort = "desc", limit = 8, page = 1, } = options;
     const query = {};
     if (filter) {
         query.genre = filter;
     }
     const sortOption = {};
     sortOption[sortBy] = sort === "asc" ? 1 : -1;
-    const books = yield book_model_1.Book.find(query).sort(sortOption).limit(limit);
-    return books;
+    const skip = (page - 1) * limit;
+    const books = yield book_model_1.Book.find(query).sort(sortOption).skip(skip).limit(limit);
+    const total = yield book_model_1.Book.countDocuments(query);
+    return {
+        data: books,
+        total,
+        page,
+        limit,
+    };
 });
 exports.getAllBooksService = getAllBooksService;
 const getBookByIdService = (id) => __awaiter(void 0, void 0, void 0, function* () {

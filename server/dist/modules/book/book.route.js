@@ -5,6 +5,7 @@ const book_controller_1 = require("./book.controller");
 const router = (0, express_1.Router)();
 router.post("/", book_controller_1.createBook);
 router.get("/", book_controller_1.getAllBooks);
+router.get("/highest-copies", book_controller_1.getHighestCopiesBooks);
 router.get("/:bookId", book_controller_1.getSingleBook);
 router.put("/:bookId", book_controller_1.updateBook);
 router.delete("/:bookId", book_controller_1.deleteBook);

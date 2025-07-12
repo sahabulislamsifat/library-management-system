@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteBook = exports.updateBook = exports.getSingleBook = exports.getAllBooks = exports.createBook = void 0;
+exports.deleteBook = exports.updateBook = exports.getSingleBook = exports.getHighestCopiesBooks = exports.getAllBooks = exports.createBook = void 0;
 const book_service_1 = require("./book.service");
+const book_model_1 = require("./book.model");
 const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield (0, book_service_1.createBookService)(req.body);
@@ -31,18 +32,15 @@ const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.createBook = createBook;
 const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { filter, sortBy = "createdAt", sort = "desc", limit = "10", } = req.query;
+        const { filter, sortBy = "createdAt", sort = "desc", limit = "8", page = "1", } = req.query;
         const data = yield (0, book_service_1.getAllBooksService)({
             filter: filter,
             sortBy: sortBy,
             sort: sort,
             limit: Number(limit),
+            page: Number(page),
         });
-        res.status(200).json({
-            success: true,
-            message: "Books retrieved successfully",
-            data,
-        });
+        res.status(200).json(Object.assign({ success: true, message: "Books retrieved successfully" }, data));
     }
     catch (error) {
         res.status(500).json({
@@ -53,6 +51,24 @@ const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllBooks = getAllBooks;
+const getHighestCopiesBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const books = yield book_model_1.Book.find().sort({ copies: -1 }).limit(8);
+        res.status(201).json({
+            success: true,
+            message: "Book retrieved successfully",
+            data: books,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            message: "Highest Books Copies retrieved failed",
+            success: false,
+            error,
+        });
+    }
+});
+exports.getHighestCopiesBooks = getHighestCopiesBooks;
 const getSingleBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { bookId } = req.params;

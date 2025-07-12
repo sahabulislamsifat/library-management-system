@@ -24,7 +24,7 @@ const server = () => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        console.error("Failed to connect database", error);
+        console.error("Failed to connect to database:", error);
         process.exit(1);
     }
 });

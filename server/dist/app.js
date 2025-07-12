@@ -7,11 +7,13 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("./routes"));
+const requestLogger_1 = require("./middlewares/requestLogger");
 exports.app = (0, express_1.default)();
 // Middlewares
 exports.app.use((0, cors_1.default)());
 exports.app.use(express_1.default.json());
-// Route Entry Point
+exports.app.use(requestLogger_1.requestLogger);
+// API Routes
 exports.app.use("/api", routes_1.default);
 // Health Check Route
 exports.app.get("/", (req, res) => {
