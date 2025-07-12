@@ -17,20 +17,17 @@ const AllBook = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (isError || !books?.length) {
-    return (
-      <p className="text-center text-red-500 mt-10">
-        Failed to load books or no books available 😢
-      </p>
-    );
-  }
-
   return (
     <div className="container mx-auto px-4 py-5">
       <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-purple-700 dark:text-purple-400">
         📚 All Books
       </h2>
-
+      {isError ||
+        (books.length === 0 && (
+          <p className="text-center text-red-500 mt-10 text-lg">
+            Failed to load books or no books available 😢
+          </p>
+        ))}
       <div className="container mx-auto px-4 py-5">
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {books.map((book: IBook) => (

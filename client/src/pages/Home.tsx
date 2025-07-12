@@ -12,14 +12,6 @@ const Home = () => {
     return <LoadingSpinner />;
   }
 
-  if (isError || !books?.length) {
-    return (
-      <p className="text-center text-red-500 mt-10 text-lg">
-        Failed to load books or no books available 😢
-      </p>
-    );
-  }
-
   return (
     <div className="w-full">
       {/* Banner */}
@@ -32,6 +24,11 @@ const Home = () => {
         </h1>
 
         <div className="w-full px-4 py-10 max-w-[1400px] mx-auto">
+          {(isError || !books?.length) && (
+            <p className="text-center text-red-500 mt-10 text-lg">
+              Failed to load books or no books available 😢
+            </p>
+          )}
           <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {books?.map((book: IBook) => (
               <BookCard key={book._id} book={book} />
