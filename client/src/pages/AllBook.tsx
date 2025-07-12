@@ -3,7 +3,6 @@ import BookCard from "@/components/book/BookCard";
 import LoadingSpinner from "@/components/loading/LoadingSpinner";
 import { useGetBooksQuery } from "@/features/book/bookApi";
 import type { IBook } from "@/types";
-import { Helmet } from "react-helmet-async";
 
 const AllBook = () => {
   const [page, setPage] = useState(1);
@@ -20,9 +19,6 @@ const AllBook = () => {
 
   return (
     <div className="container mx-auto px-4 py-5">
-      <Helmet>
-        <title>Library Management System | All Books</title>
-      </Helmet>
       <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-purple-700 dark:text-purple-400">
         📚 All Books
       </h2>
