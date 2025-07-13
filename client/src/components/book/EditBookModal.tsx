@@ -166,7 +166,7 @@ const EditBookModal = ({ book }: EditBookProps) => {
               <Input
                 className="w-24 border  px-3 py-2 bg-white/50 dark:bg-neutral-950/50 dark:text-white rounded-none cursor-pointer dark:border-gray-600 focus:ring-purple-500 focus:outline-none"
                 type="number"
-                min={1}
+                min={0}
                 {...register("copies", {
                   required: "Copies is required",
                   valueAsNumber: true,

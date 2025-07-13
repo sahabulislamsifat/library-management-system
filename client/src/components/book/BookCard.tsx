@@ -59,7 +59,7 @@ const BookCard = ({ book }: { book: IBook }) => {
           </p>
         )}
 
-        <p
+        {/* <p
           className={`text-sm line-clamp-3 ${
             book.available
               ? "text-green-600 dark:text-green-400"
@@ -67,6 +67,15 @@ const BookCard = ({ book }: { book: IBook }) => {
           }`}
         >
           {book.available ? "Available" : "Unavailable"}
+        </p> */}
+        <p
+          className={`text-sm line-clamp-3 ${
+            book.copies > 0
+              ? "text-green-600 dark:text-green-400"
+              : "text-red-600 dark:text-red-400"
+          }`}
+        >
+          {book.copies > 0 ? "Available" : "Unavailable"}
         </p>
       </div>
 
